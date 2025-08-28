@@ -8,16 +8,26 @@ st.write('Esta aplicación web te permite convertir una temperatura de grados Ce
 # ----------------- Conversor -----------------
 st.header('Conversor')
 
-# Campo para que el usuario ingrese la temperatura en Celsius
-celsius = st.number_input('Ingresa la temperatura en grados Celsius:')
+# Campo para que el usuario ingrese la temperatura en Celsius usando text_input
+celsius_str = st.text_input('Ingresa la temperatura en grados Celsius:')
 
 # Botón para realizar la conversión
 if st.button('Convertir'):
-    # Fórmula de conversión: F = (C * 9/5) + 32
-    fahrenheit = (celsius * 9/5) + 32
-    
-    # Muestra el resultado
-    st.success(f'**{celsius} °C** equivale a **{fahrenheit:.2f} °F**')
+    if celsius_str:
+        try:
+            # Convierte la entrada de texto a un número flotante
+            celsius = float(celsius_str)
+            
+            # Fórmula de conversión: F = (C * 9/5) + 32
+            fahrenheit = (celsius * 9/5) + 32
+            
+            # Muestra el resultado
+            st.success(f'**{celsius} °C** equivale a **{fahrenheit:.2f} °F**')
+        except ValueError:
+            # Muestra un mensaje de error si la entrada no es un número válido
+            st.error('Por favor, ingresa un número válido.')
+    else:
+        st.warning('Por favor, ingresa un valor para convertir.')
 
 # ----------------- Tabla de Referencia -----------------
 st.header('Tabla de Referencia')
